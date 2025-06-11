@@ -1,10 +1,13 @@
 import serial
 import numpy as np
+import matplotlib
+matplotlib.use('TkAgg')  # Use 'MacOSX' if 'TkAgg' doesn't work on your Mac
 import matplotlib.pyplot as plt
 import time
 
+
 # === Configuration ===
-SERIAL_PORT = 'COM4'     # Change this to your serial port (e.g., '/dev/ttyUSB0' on Linux)
+SERIAL_PORT = '/dev/tty.usbmodem3C8427C482882'     # Change this to your serial port (e.g., '/dev/ttyUSB0' on Linux)
 BAUD_RATE = 115200
 TIMEOUT = 1              # seconds
 
