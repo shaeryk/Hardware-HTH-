@@ -9,7 +9,7 @@ int counter = 0;
 bool occupancy = false;
 
 // Tstat and ESP32 MUST be on the same network
-const char* ssid = "tstat";
+const char* ssid = "t-stat";
 const char* password = "werty000!";
 
 // uncomment *one* of the below
@@ -80,7 +80,7 @@ void setup() {
 
 void loop() {
 
-  delay(5000);  // Need to send backend okay or not okay state every 5 seconds
+  delay(1000);  // Need to send backend okay or not okay state every 5 seconds
   counter = 0;
   occupancy = digitalRead(SWITCH_PIN);
 
@@ -98,7 +98,7 @@ void loop() {
   for (uint8_t h = 0; h < 24; h++) {
     for (uint8_t w = 0; w < 32; w++) {
       float pixTemp = frame[h * 32 + w];
-      if (pixTemp > 36 && occupancy == false) {
+      if (pixTemp > 70 && occupancy == false) {
         counter = counter + 1;
       }
 
@@ -112,8 +112,7 @@ void loop() {
   if (counter >= 3) {
     if (WiFi.status() == WL_CONNECTED) {
       HTTPClient http;
-      http.begin("http://jsonplaceholder.typicode.com/comments?id=10");  // Dummy HTTP server to verify logic works -> Returns a json in the serial monitor
-      //http.begin ("http://{deviceIP}:8005/heatAlert/value=1"); // need to verify the HTTP command with backend
+      http.begin("http://10.90.40.105:3000/sensorPolling?isOn=true");  
 
       //Assuming backend sends some data back to acknowledge request has been received
       int httpReturn = http.GET();

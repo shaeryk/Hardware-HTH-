@@ -18,7 +18,7 @@ time.sleep(2)  # Give some time for the serial connection to initialize
 # === Initialize Plot ===
 plt.ion()
 fig, ax = plt.subplots()
-heatmap = ax.imshow(np.zeros((24, 32)), vmin=20, vmax=120, cmap='coolwarm')
+heatmap = ax.imshow(np.zeros((24, 32)), vmin=20, vmax=75, cmap='coolwarm')
 cbar = fig.colorbar(heatmap)
 ax.set_title("MLX90640 Thermal Camera")
 ax.set_xlabel("Pixel X")
